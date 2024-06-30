@@ -20,3 +20,38 @@ Output:
 30
 */
 
+function main (input) {
+    
+    let lines = input.split('\n');
+    let n = parseInt(lines[0]);
+    let ar = lines[1].split(' ').map(Number);
+
+    ar.sort((a, b) => a - b);
+
+    let median;
+
+    if(n & 1){ // odd 
+        median = ar[(n - 1) / 2];
+    }else{
+        median = (ar[n / 2] + ar[n / 2 - 1]) / 2;
+    }
+
+    let sum = 0;
+
+    for(let i = 0; i < n; i++){
+        if(ar[i] < median) sum += ar[i];
+    }
+    
+    // console.log(ar);
+    // console.log(median);
+    console.log(sum);
+}
+
+let input = "";
+process.stdin.on('data', (chunk) => {
+    input += chunk;
+});
+
+process.stdin.on('end', () => {
+    main(input.trim());
+});
